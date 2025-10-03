@@ -12,8 +12,11 @@ const app = express();
 const PORT = process.env.PORT || 5001;
 
 // Middleware
+// Remove trailing slash from FRONTEND_URL if present
+const frontendURL = (process.env.FRONTEND_URL || 'http://localhost:3001').replace(/\/$/, '');
+
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3001',
+  origin: [frontendURL, 'http://localhost:3001'],
   credentials: true,
 }));
 app.use(express.json());
