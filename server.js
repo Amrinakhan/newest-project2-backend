@@ -293,7 +293,12 @@ app.post('/api/logout', authenticateToken, async (req, res) => {
   }
 });
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`🚀 Project 2 Server running on http://localhost:${PORT}`);
-});
+// Start server (only in local development)
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`🚀 Project 2 Server running on http://localhost:${PORT}`);
+  });
+}
+
+// Export for Vercel
+module.exports = app;
